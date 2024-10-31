@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const Post = ({post}) => {
+    const navigate = useNavigate();
     const {id, title} = post;
     const postStyle = {
         border: '2px solid yellow',
@@ -11,11 +13,16 @@ const Post = ({post}) => {
         flexDirection: 'column',   
     }
 
+    const handlePostDetail = () => {
+        navigate(`/post/${id}`)
+    }
+
     return (
         <div style= {postStyle} >
             <h4>Post of Id: {id} </h4>
             <h3 style={{flexGrow:1}}>Title: {title} </h3>
             <Link to={`/post/${id}`}><button>Post Details</button></Link>
+            <button onClick={handlePostDetail}>Click for Details</button>
         </div>
     );
 };
